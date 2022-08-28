@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reto 1 Js</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <section>
+        <div class="divResultado">
+            <h1>Nelumbo</h1>
+            <table>
+                <thead id="tableHead">
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Salario a Pagar</th>
+                        <th>Horas Trabajadas</th>
+                        <th>Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody"></tbody>                
+            </table>
+        </div>
+
+        <div class="divFormulario">
+            <h2>Nomina Salarial Nelumbo</h2>
+            <form class="formulario" id="formulario">
+                <div>
+                    <label for="nombre">Nombre Empleado:</label>
+                    <input id="nombre" class="nombre" type="text" name="name" placeholder="Escribe tu nombre"
+                    title="Nombre sólo acepta letras y espacios en blanco" pattern="^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$" >
+                </div>
+                <div>
+                    <label for="salario">Salario:</label>
+                    <input id="salario" type="number" placeholder="Digite el salario base">
+                </div>
+                <div>
+                    <label for="horasTra">Horas Trabajadas:</label>
+                    <input id="horasTra" type="number" title="Horas solo acepta numero enteros" placeholder="Digite las horas trabajadas" >
+                </div>
+                <input class="btn" type="submit" value="Consultar Salario">
+            </form>
+        </div>
+    </section>
+    
+    <script src="formulario.js"></script>
+    <!-- <script src="brayan.js"></script> -->
+    <!-- <script src="code.js"></script> -->
+</body>
+</html>
