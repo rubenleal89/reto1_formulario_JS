@@ -1,13 +1,44 @@
 let tablaResul = [];
 let indexN = 0;
+// let idLocal = identificador();
+
+function identificador(){
+    let lastId = localStorage.getItem("lastId") || "-1";
+    let newId = JSON.parse(lastId) + 1;
+    localStorage.setItem("lastId", JSON.stringify(newId));
+    return newId;
+}
+
+function eliminarLocal(identificador) {
+    JSON.parse(localStorage.getItem(identificador))
+    let indexArray = tablaResul.findIndex(element => element.Id === identificador)
+    indexArray.splice(indexArray,1);
+    localStorage.setItem("formulario",JSON.stringify(tablaResul));    
+}
 
 function resul(nombre,salarioB,horasT){
     let trabajadores = {nombreRes:nombre,
                     salarioRes:salarioB,
-                    horasRes:horasT
+                    horasRes:horasT,
+                    Id:identificador()
                     };
     tablaResul.push(trabajadores);
     return trabajadores;
+}
+
+
+function validaciones(nombreTrabajador,salarioBase,horasTrabajadas){
+    if (isNaN(nombreTrabajador) && (/^\d*\.\d+$/.test(salarioBase) || /^[0-9]+$/.test(salarioBase)) && /^[0-9]+$/.test(horasTrabajadas)){
+        let salarioTotal = horasExtras(horasTrabajadas,salarioBase);
+        salarioTotal = impuestosSueldo (salarioTotal);
+        resul(nombreTrabajador,salarioTotal,horasTrabajadas);
+        formulario.reset();
+        saveDatosLocalArray();
+    }
+    else {
+        alert("Revice que los datos sean correctos");
+    }
+    
 }
 
 function saveDatosLocalArray(){
@@ -24,7 +55,7 @@ function crearTable(){
         tablaResul.forEach(element => {
             indexN = indexN + 1;
             table.innerHTML += `
-                    <tr id="trEliminar${indexN}">
+                    <tr data-id="trEliminar${indexN}">
                         <td>${element.nombreRes}</td>
                         <td>${element.salarioRes}</td>
                         <td>${element.horasRes}</td>
@@ -46,17 +77,11 @@ document.addEventListener('DOMContentLoaded',crearTable);
 // document.getElementById("btnEliminar").onclick=eliminar(this);
 
 function eliminar(td) {
-    let finIndex = 0;
-    for(i=0;i < indexN;i++){
-        if(i<=indexN){
-            finIndex++;
-            document.getElementById(`trEliminar${finIndex}`);
-            td.parentNode.parentNode.remove();
-        }
-        else{
-            alert("ERROR")
-        }
-    }
+    let filaEliminar = td.parentNode.parentNode//.remove();
+    document.getElementById(`trEliminar`);
+    let dataId = filaEliminar.getAttribute("data-id");
+    filaEliminar.remove();
+    eliminarLocal(dataId);
 }
 
 function horasExtras(horasTrabajadas,salarioBase){
@@ -94,11 +119,8 @@ function envio(e){
     let salarioBase = document.getElementById("salario").value;
     let horasTrabajadas = document.getElementById("horasTra").value;
     /////////////////////////////////////////////////////////////////
-    let salarioTotal = horasExtras(horasTrabajadas,salarioBase);
-    salarioTotal = impuestosSueldo (salarioTotal);
-    resul(nombreTrabajador,salarioTotal,horasTrabajadas);
-    formulario.reset();
-    saveDatosLocalArray();
+    // e.preventDefault();
+    validaciones(nombreTrabajador,salarioBase,horasTrabajadas);
 }
 
 
