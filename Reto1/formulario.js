@@ -1,6 +1,5 @@
 let tablaResul = [];
 let indexN = 0;
-// let idLocal = identificador();
 
 function identificador(){
     let lastId = localStorage.getItem("lastId") || "-1";
@@ -9,7 +8,7 @@ function identificador(){
     return newId;
 }
 
-function eliminarLocal(identificador) {
+function eliminarLocal(identificador) {  // Funcion para eliminar lo del localStorage(no funcional)
     JSON.parse(localStorage.getItem(identificador))
     let indexArray = tablaResul.findIndex(element => element.Id === identificador)
     indexArray.splice(indexArray,1);
@@ -67,21 +66,15 @@ function crearTable(){
 
 let table = document.getElementById("tableBody");
 
-// let botonEliminar = document.getElementById(`btnEliminar${indexN}`);
-//             botonEliminar.addEventListener("click",(event)=>{
-//                 event.target.parentNode.parentNode.remove();
-//                 }
-//             )
-
 document.addEventListener('DOMContentLoaded',crearTable);
 // document.getElementById("btnEliminar").onclick=eliminar(this);
 
 function eliminar(td) {
-    let filaEliminar = td.parentNode.parentNode//.remove();
-    document.getElementById(`trEliminar`);
-    let dataId = filaEliminar.getAttribute("data-id");
-    filaEliminar.remove();
-    eliminarLocal(dataId);
+    let filaEliminar = td.parentNode.parentNode.remove();
+    // document.getElementById(`trEliminar`);  // Para eliminar del localStorage (no funcional)
+    // let dataId = filaEliminar.getAttribute("data-id");
+    // filaEliminar.remove();
+    // eliminarLocal(dataId);
 }
 
 function horasExtras(horasTrabajadas,salarioBase){
@@ -122,15 +115,3 @@ function envio(e){
     // e.preventDefault();
     validaciones(nombreTrabajador,salarioBase,horasTrabajadas);
 }
-
-
-
-
-
-
-
-// function limpiarFormulario() {
-//     document.getElementById("nombre").value = '';
-//     document.getElementById("salario").value = '';
-//     document.getElementById("horasTra").value = '';
-// }
