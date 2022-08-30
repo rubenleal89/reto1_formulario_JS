@@ -75,6 +75,7 @@ function eliminar(td) {
     // let dataId = filaEliminar.getAttribute("data-id");
     // filaEliminar.remove();
     // eliminarLocal(dataId);
+    //
 }
 
 function horasExtras(horasTrabajadas,salarioBase){
